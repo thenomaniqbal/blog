@@ -1,0 +1,32 @@
+<%= link_to 'New book', new_book_path, class: 'btn btn-primary' %>
+    <h1> BOOKS </h1>
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Articles</th>
+        <th colspan="3"></th>
+    </tr>
+        <% @books.each do |book| %>
+    <tr>
+        <td><%= book.title %></td>
+        <td><%= book.articles.map {|a| a.title}.join (', ') %></td>
+        <th colspan="3"></th>
+    <td>
+        <%= link_to 'View', book_path(book), class: 'btn btn-success' %>
+    </td>
+    <td>
+        <%= link_to 'Edit', edit_book_path(book), class: 'btn btn-info' %>
+    </td>
+    <td>
+        <%= link_to 'Delete', book_path(book), remote: true,class: 'btn btn-danger',
+                                 method: :delete,
+                                 data: {confirm: 'Are you sure?'} %>
+    </td>
+
+    </tr>
+    <% end %>
+</table>
+<br>
+
+
+

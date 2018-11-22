@@ -1,0 +1,65 @@
+	<p id="notice"> <%= notice %> </p>
+	  <div class="container" style="text-align: center;">
+		<div class="row">
+			<div class="col-md-12">
+				<article>
+					<hr>
+					<h1><a href="#">  <%= @article.title %> </a></h1>
+
+			        <div class="row">
+			          	<div class="group2 col-sm-6 col-md-6">
+			          	  <span class="glyphicon glyphicon-pencil"></span> <a href="#">
+			          	  Comments= </a><%= @article.comments.count %> 
+			          	  <span class="glyphicon glyphicon-folder-open"></span> &nbsp;<a href="#"> Article number=</a> <%= @article.id %> 	
+			          	</div>
+
+
+			          	<div class="group1 col-sm-6 col-md-6">
+			          		<span class="glyphicon glyphicon-folder-open"></span> &nbsp;<strong> posted By = </strong>  <%= @article.user.email %>
+
+			          		&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> 
+			          		<%= @article.created_at.strftime("%A,%d %B %Y, %l:%M%p")%>
+			          		
+			          	</div>	
+			           </div>
+			           <div>
+			           	
+			          		&nbsp;&nbsp;<span class="glyphicon glyphicon-bookmark"></span> 
+			          <a href="#">Books:</a>   <%= @article.books.map{|a|a.title}.join(', ') %>
+			           </div>
+
+			          <hr>
+			          <div >
+			          <%= image_tag @article.image.url(:large) %>
+			      </div>
+
+			          <br />
+
+			          <p class="lead"><%= @article.text %></p>
+			          <hr>
+			          <hr>
+				</article>
+    <div >		
+
+      <h2> Comments </h2>
+
+	<%= render @article.comments %>
+
+    <h1> Add a comment </h1>
+<%= render 'comments/form' %>
+    </div>
+    <div style="text-align: center;">
+<% if user_signed_in? %>
+<% if @article.user == current_user %>		
+<%= link_to 'Delete', article_path(@article),remote: true, class: 'btn btn-danger',
+                         method: :delete,
+                         data: {confirm: 'Are you sure?'} %>
+<%= link_to 'Edit', edit_article_path(@article),class: 'btn btn-info' %>
+<% end %>
+<% end %>
+<%= link_to 'Back', articles_path, class: 'btn btn-secondary' %>
+		</div>
+
+</div>
+</div>
+</div>

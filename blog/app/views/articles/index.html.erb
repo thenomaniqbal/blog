@@ -1,0 +1,62 @@
+<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content"></div>
+  </div>
+</div>
+
+  <div class="container" style="text-align: center;">
+    <div class="row">
+      <div class="col-md-12">
+
+        <h1>Latest Posts</h1>
+        <hr>
+        <% @articles.each do |article| %>
+
+        <article>
+          <h2><a href="#"><%= article.title %></a></h2>
+
+              <div class="row">
+                  <div class="group1 col-sm-6 col-md-6">
+                    <a href="#">Comments= </a>
+                    <%= article.comments.count %> 
+                    &nbsp;<strong> Article no.=</strong> 
+                    <%= article.id %>   
+                  </div>
+
+
+                  <div class="group1 col-sm-6 col-md-6">
+                    <strong> posted By: </strong>  
+                    <%= article.user.email %>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Posted Date:</strong>  
+                    <%= article.created_at.strftime("%A,%d %B %Y")%>                    
+                  </div>  
+                 </div>
+
+                 <div>                  
+                 <a href="#"><strong>Books:</strong></a>   
+                 <%= article.books.map{|a|a.title}.join(', ') %>
+                 </div>
+
+                <hr>
+                <div>
+                 <%= image_tag article.image.url(:large) %>      
+
+                </div>
+
+                <br />
+                <p><%= article.text %></p>
+
+
+
+            <p class="text-right" >
+              <%= link_to 'Continue Reading....', article_path(article),style:"color: #daa019" %>
+              </p>
+
+                <hr>
+                 <% end %>
+        </article>
+    </div>
+  </div>
+</div>
+
